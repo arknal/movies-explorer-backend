@@ -12,12 +12,7 @@ const app = express();
 
 const { CORS_ORIGIN = 'http://localhost:3000', DB_PATH = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 
-try {
-  mongoose.connect(DB_PATH);
-} catch (e) {
-  // eslint-disable-next-line no-console
-  console.log('Не удалось подключиться к базе данных по адресу', DB_PATH);
-}
+mongoose.connect(DB_PATH);
 
 app.use(express.json());
 app.use(cors({ 'Access-Control-Allow-Origin': CORS_ORIGIN }));
@@ -30,4 +25,4 @@ app.use(() => {
 });
 app.use(errorHandler);
 
-module.exports = { app };
+module.exports = app;
