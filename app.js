@@ -6,7 +6,6 @@ const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
-const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
 
@@ -20,9 +19,6 @@ app.use(requestLogger);
 app.use('/', router);
 app.use(errorLogger);
 app.use(errors());
-app.use(() => {
-  throw new NotFoundError('404 Not Found');
-});
 app.use(errorHandler);
 
 module.exports = app;
